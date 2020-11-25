@@ -24,7 +24,7 @@ public class ControlBoard extends AppCompatActivity {
     private BluetoothAdapter myBluetooth = null;
     private BluetoothSocket btSocket = null;
     // This UUID is unique and fix id for this device
-    private static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    private static final UUID myUUID = UUID.fromString("f6332bbb-1f1d-4563-b548-175fca1dfb19");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
