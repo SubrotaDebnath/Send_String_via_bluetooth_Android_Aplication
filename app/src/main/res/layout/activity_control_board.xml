@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -26,38 +26,45 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/extended_fab"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="-72dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Message"
                 android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
                 android:padding="3dp"
+                android:text="Message"
                 android:textColor="@color/black"
                 android:textSize="18dp"
-                android:textStyle="bold"
-                android:layout_marginTop="10dp" />
+                android:textStyle="bold" />
+
             <EditText
+                android:id="@+id/controlBoardMessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="message....."
+                android:layout_margin="15dp"
+                android:background="#CBCFD1"
                 android:ellipsize="start"
-                android:textSize="14dp"
-                android:textColor="@color/black"
                 android:gravity="top|left"
+                android:hint="message....."
                 android:inputType="text|textMultiLine"
                 android:lines="10"
                 android:minLines="5"
-                android:scrollHorizontally="false"
-                android:scrollbars="vertical"
-                android:background="#CBCFD1"
-                android:layout_margin="15dp"
                 android:padding="3dp"
-                android:id="@+id/controlBoardMessage"/>
+                android:scrollbars="vertical"
+                android:scrollHorizontally="false"
+                android:textColor="@color/black"
+                android:textSize="14dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -67,77 +74,79 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Speed"
                     android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
                     android:padding="3dp"
+                    android:text="Speed : "
                     android:textColor="@color/black"
                     android:textSize="18dp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="10dp" />
+                    android:textStyle="bold" />
+
                 <Spinner
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="20dp"
                     android:padding="3dp"
+                    android:prompt="1000"
+                    android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="18dp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="10dp"
-                    android:prompt="1000"/>
+                    android:textStyle="bold" />
 
             </LinearLayout>
-
 
 
             <CheckBox
                 android:id="@+id/controlBoardCB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Additional String"
                 android:layout_margin="20dp"
-                android:textStyle="normal"
+                android:text="Additional String"
                 android:textColor="@color/black"
-                android:textSize="16dp"/>
+                android:textSize="16dp"
+                android:textStyle="normal" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="center"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="30dp"
+                android:gravity="center"
                 android:orientation="vertical">
+
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Send"
                     android:background="@drawable/button_shap"
+                    android:gravity="center"
+                    android:onClick="send"
+                    android:padding="5dp"
+                    android:text="Send"
                     android:textColor="@color/white"
                     android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:padding="5dp"
-                    android:gravity="center"
-                    android:onClick="send"/>
+                    android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/extended_fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="bottom|right"
-            android:contentDescription=""
-            android:text="About"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
-            android:background="#FF5722"
-            app:icon="@drawable/ic_baseline_add_24"
-            app:cornerRadius="8dp"/>
 
     </ScrollView>
 
-</RelativeLayout>
+   <!-- <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/extended_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom|right"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:background="#FF5722"
+        android:contentDescription=""
+        android:text="About"
+        app:cornerRadius="8dp"
+        app:icon="@drawable/ic_baseline_add_24" />-->
+
+</LinearLayout>
