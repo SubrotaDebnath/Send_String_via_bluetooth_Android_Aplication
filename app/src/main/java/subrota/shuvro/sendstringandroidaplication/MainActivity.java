@@ -134,7 +134,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityCommu
             recyclerView.setVisibility(View.GONE);
             refresh.setVisibility(View.VISIBLE);
         }
-
     }
 
 
