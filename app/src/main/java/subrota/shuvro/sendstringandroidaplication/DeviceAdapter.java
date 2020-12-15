@@ -34,7 +34,6 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.name.setText(devices.get(position).getName());
         holder.id.setText(devices.get(position).getId());
-
         holder.deviceRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,7 +43,6 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
                 context.startActivity(intent);
             }
         });
-
     }
 
     @Override
