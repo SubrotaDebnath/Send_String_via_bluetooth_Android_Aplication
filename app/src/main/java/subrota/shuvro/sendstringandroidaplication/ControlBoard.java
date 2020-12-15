@@ -23,7 +23,6 @@ public class ControlBoard extends AppCompatActivity {
     private EditText messageET;
     private BluetoothAdapter myBluetooth = null;
     private BluetoothSocket btSocket = null;
-    // This UUID is unique and fix id for this device
     private static final UUID myUUID = UUID.fromString("f6332bbb-1f1d-4563-b548-175fca1dfb19");
 
     @Override
@@ -33,7 +32,6 @@ public class ControlBoard extends AppCompatActivity {
 
         title = findViewById(R.id.controlBoardTitle);
         messageET = findViewById(R.id.controlBoardMessage);
-
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
 
@@ -74,7 +72,6 @@ public class ControlBoard extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-
         }
     }
 }
