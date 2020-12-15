@@ -111,9 +111,7 @@ public class MainActivity extends AppCompatActivity {
             recyclerView.setVisibility(View.GONE);
             refresh.setVisibility(View.VISIBLE);
         }
-
     }
-
 
     public void refresh(View view) {
         Intent intent = new Intent(this, SplashScreen.class);
