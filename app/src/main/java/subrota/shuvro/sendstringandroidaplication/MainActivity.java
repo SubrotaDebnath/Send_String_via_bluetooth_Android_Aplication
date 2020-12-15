@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     private List<DeviceInfoDataSet> devices = new ArrayList<>();
     private String[] array = new String[50];
     private Set<BluetoothDevice> pairedDevices;
-    //private ListView listView;
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private DeviceAdapter adapter;
@@ -44,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         rootView = getWindow().getDecorView().getRootView();
         pairedDevices = bluetoothAdapter.getBondedDevices();
-
-        //listView = findViewById(R.id.lv_paired_devices);
         recyclerView = findViewById(R.id.paired_devices);
         linearLayoutManager = new LinearLayoutManager(this);
         refresh = findViewById(R.id.screenRefresh);
@@ -58,8 +55,6 @@ public class MainActivity extends AppCompatActivity {
         getDevices();
         enableBluetooth();
         setAdapter();
-
-
     }
 
     public void showDevices(){
