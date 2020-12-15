@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(this);
         refresh = findViewById(R.id.screenRefresh);
 
-
         if (bluetoothAdapter == null) {
             // Device doesn't support Bluetooth
             helper.showSnackBar(rootView.getRootView(), "Device doesn't support Bluetooth");
