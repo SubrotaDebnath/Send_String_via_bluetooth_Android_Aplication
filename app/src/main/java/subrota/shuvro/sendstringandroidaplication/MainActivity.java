@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
@@ -21,7 +22,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class MainActivity extends AppCompatActivity {
+import app.akexorcist.bluetotohspp.library.BluetoothSPP;
+import app.akexorcist.bluetotohspp.library.BluetoothState;
+import app.akexorcist.bluetotohspp.library.DeviceList;
+
+public class MainActivity extends AppCompatActivity implements MainActivityCommunicator.HandelView {
     private BluetoothAdapter bluetoothAdapter;
     private static final int REQUEST_ENABLE_BT = 1;
     private View rootView;
@@ -35,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
     private DeviceAdapter adapter;
     private static final String TAG = "MainActivity";
     private TextView refresh;
+    private MainActivityPresenter presenter;
+    private BluetoothSPP bt;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,24 +51,35 @@ public class MainActivity extends AppCompatActivity {
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         rootView = getWindow().getDecorView().getRootView();
-        pairedDevices = bluetoothAdapter.getBondedDevices();
+        //pairedDevices = bluetoothAdapter.getBondedDevices();
 
         //listView = findViewById(R.id.lv_paired_devices);
         recyclerView = findViewById(R.id.paired_devices);
         linearLayoutManager = new LinearLayoutManager(this);
         refresh = findViewById(R.id.screenRefresh);
 
+        presenter = new MainActivityPresenter(getApplicationContext(), this);
+
+        bt = new BluetoothSPP(this);
+
+        bt.startService(BluetoothState.DEVICE_OTHER);
+
+        Intent intent = new Intent(getApplicationContext(), DeviceList.class);
+        startActivityForResult(intent, BluetoothState.REQUEST_CONNECT_DEVICE);
+
+
+
 
         if (bluetoothAdapter == null) {
             // Device doesn't support Bluetooth
             helper.showSnackBar(rootView.getRootView(), "Device doesn't support Bluetooth");
         }
-        getDevices();
-        enableBluetooth();
-        setAdapter();
-
-
+        //getDevices();
+        //enableBluetooth();
+        //setAdapter();
     }
+
+
 
     public void showDevices(){
 
@@ -71,30 +90,29 @@ public class MainActivity extends AppCompatActivity {
         if (pairedDevices.size() > 0) {
             // Loop through paired devices
             for (BluetoothDevice device : pairedDevices) {
-                DeviceInfoDataSet deviceInfoDataSet = new DeviceInfoDataSet(device.getName(), device.getAddress());
+                DeviceInfoDataSet deviceInfoDataSet = new DeviceInfoDataSet(device.getName(), device.getAddress(), device);
                 Log.i(TAG, "device name: "+ device.getName());
                 devices.add(deviceInfoDataSet);
-
             }
         }
     }
 
 
     ////////////////click event for acpt/ cancel bluetooth enable
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_ENABLE_BT && resultCode == RESULT_CANCELED) {
-            Toast.makeText(this, "please turn on your bluetooth", Toast.LENGTH_SHORT).show();
-            //helper.showSnackBar(rootView, "please turn on your bluetooth");
-            enableBluetooth();
-
-        } else {
-            //Toast.makeText(this, "Bluetooth Turned on", Toast.LENGTH_LONG).show();
-            helper.showSnackBar(rootView.getRootView(), "Bluetooth Turned on");
-            getDevices();
-            setAdapter();
-        }
-    }
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == REQUEST_ENABLE_BT && resultCode == RESULT_CANCELED) {
+//            Toast.makeText(this, "please turn on your bluetooth", Toast.LENGTH_SHORT).show();
+//            //helper.showSnackBar(rootView, "please turn on your bluetooth");
+//            enableBluetooth();
+//
+//        } else {
+//            //Toast.makeText(this, "Bluetooth Turned on", Toast.LENGTH_LONG).show();
+//            helper.showSnackBar(rootView.getRootView(), "Bluetooth Turned on");
+//            getDevices();
+//            setAdapter();
+//        }
+//    }
 
     ////////////check bluetooth enable or not/////////////////////////
     public void enableBluetooth() {
@@ -124,5 +142,14 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SplashScreen.class);
         intent.putExtra("msg", "Restarting....");
         startActivity(intent);
+
+    }
+
+    @Override
+    public void changeActivity() {
+
+        Intent intent = new Intent(getApplicationContext(), DeviceList.class);
+        startActivityForResult(intent, BluetoothState.REQUEST_CONNECT_DEVICE);
+
     }
 }

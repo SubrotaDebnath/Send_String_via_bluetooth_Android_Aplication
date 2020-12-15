@@ -12,6 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SendStringAndroidAplication">
+
+        <activity android:name=".DeviceListActivity" />
+
+
         <activity android:name=".ControlBoard"></activity>
         <activity android:name=".SplashScreen">
             <intent-filter>

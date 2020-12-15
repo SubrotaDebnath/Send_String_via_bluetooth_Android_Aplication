@@ -1,7 +1,7 @@
 package subrota.shuvro.sendstringandroidaplication;
 
 import android.content.Context;
-import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder>{
+    private static final String TAG = "DeviceAdapter";
     private List<DeviceInfoDataSet> devices = new ArrayList<>();
     private Context context;
-
+    private MainActivityPresenter presenter;
     public DeviceAdapter(List<DeviceInfoDataSet> devices, Context context) {
         this.devices = devices;
         this.context = context;
+       // presenter = new MainActivityPresenter(context, );
+        //listener = (ActOnProgress) context;
     }
 
     @NonNull
@@ -38,12 +41,24 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
         holder.deviceRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.i(TAG, "Name: "+ devices.get(position).getName());
+                Log.i(TAG, "ID: "+ devices.get(position).getId());
+
+                //presenter.startConnection(1, devices.get(position).getId(), devices.get(position).getName(), devices.get(position).getDevice() );
+
+            }
+        });
+
+        /*holder.deviceRow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ControlBoard.class);
                 intent.putExtra("id", devices.get(position).getId());
                 intent.putExtra("name", devices.get(position).getName());
                 context.startActivity(intent);
             }
-        });
+        });*/
+
 
     }
 
@@ -62,4 +77,5 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
             deviceRow = itemView.findViewById(R.id.deviceRow);
         }
     }
+
 }
