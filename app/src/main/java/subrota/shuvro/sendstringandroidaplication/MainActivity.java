@@ -57,11 +57,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityCommu
         recyclerView = findViewById(R.id.paired_devices);
         linearLayoutManager = new LinearLayoutManager(this);
         refresh = findViewById(R.id.screenRefresh);
-
         presenter = new MainActivityPresenter(getApplicationContext(), this);
 
         bt = new BluetoothSPP(this);
-
         bt.startService(BluetoothState.DEVICE_OTHER);
 
         Intent intent = new Intent(getApplicationContext(), DeviceList.class);
