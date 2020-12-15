@@ -9,8 +9,6 @@ import android.os.Handler;
 
 public class SplashScreen extends AppCompatActivity {
     private ProgressDialog pd;
-
-
     private final int SPLASH_DISPLAY_LENGTH = 1000;
 
     @Override
@@ -22,7 +20,6 @@ public class SplashScreen extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-
         if (bundle != null){
             String message =(String) bundle.get("msg");
             progressShow(message);
@@ -31,7 +28,6 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
-                /* Create an Intent that will start the Menu-Activity. */
                 Intent mainIntent = new Intent(SplashScreen.this, MainActivity.class);
                 SplashScreen.this.startActivity(mainIntent);
                 SplashScreen.this.finish();
