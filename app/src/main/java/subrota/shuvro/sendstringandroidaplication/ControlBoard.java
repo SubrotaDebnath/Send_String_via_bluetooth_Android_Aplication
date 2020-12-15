@@ -14,6 +14,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.util.Set;
 import java.util.UUID;
 
 public class ControlBoard extends AppCompatActivity {
@@ -23,6 +24,7 @@ public class ControlBoard extends AppCompatActivity {
     private EditText messageET;
     private BluetoothAdapter myBluetooth = null;
     private BluetoothSocket btSocket = null;
+    private Set<BluetoothDevice> pairedDevices;
     private static final UUID myUUID = UUID.fromString("f6332bbb-1f1d-4563-b548-175fca1dfb19");
 
     @Override
@@ -38,6 +40,7 @@ public class ControlBoard extends AppCompatActivity {
         if (bundle != null){
             id =(String) bundle.getString("id");
             name =(String) bundle.getString("name");
+            pairedDevices = (Set<BluetoothDevice>) bundle.getSerializable("devices");
             title.setText(name);
         }
         Log.i(TAG, "id: "+id+"  name: "+name);

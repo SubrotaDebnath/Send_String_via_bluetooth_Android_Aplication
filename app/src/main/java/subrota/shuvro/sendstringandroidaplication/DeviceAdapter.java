@@ -1,5 +1,6 @@
 package subrota.shuvro.sendstringandroidaplication;
 
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -11,16 +12,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder>{
     private List<DeviceInfoDataSet> devices = new ArrayList<>();
+    private  Set<BluetoothDevice> pairedDevices;
     private Context context;
 
-    public DeviceAdapter(List<DeviceInfoDataSet> devices, Context context) {
+    public DeviceAdapter(Context context,List<DeviceInfoDataSet> devices,  Set<BluetoothDevice> pairedDevices) {
         this.devices = devices;
         this.context = context;
+        this.pairedDevices = pairedDevices;
     }
 
     @NonNull
@@ -40,6 +45,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
                 Intent intent = new Intent(v.getContext(), ControlBoard.class);
                 intent.putExtra("id", devices.get(position).getId());
                 intent.putExtra("name", devices.get(position).getName());
+                intent.putExtra("devices", (Serializable) pairedDevices);
                 context.startActivity(intent);
             }
         });

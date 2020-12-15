@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
     public void setAdapter(){
         if (devices.size()>0){
             recyclerView.setLayoutManager(linearLayoutManager);
-            adapter = new DeviceAdapter(devices, this);
+            adapter = new DeviceAdapter(this, devices, pairedDevices);
             recyclerView.setAdapter(adapter);
         }else {
             recyclerView.setVisibility(View.GONE);
