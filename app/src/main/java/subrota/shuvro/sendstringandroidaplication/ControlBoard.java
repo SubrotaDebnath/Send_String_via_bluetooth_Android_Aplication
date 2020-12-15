@@ -45,13 +45,9 @@ public class ControlBoard extends AppCompatActivity {
         try {
             if (btSocket == null /*|| !isBtConnected*/) {
                 myBluetooth = BluetoothAdapter.getDefaultAdapter();
-
-                // This will connect the device with address as passed
                 BluetoothDevice hc = myBluetooth.getRemoteDevice(id);
                 btSocket = hc.createInsecureRfcommSocketToServiceRecord(myUUID);
                 BluetoothAdapter.getDefaultAdapter().cancelDiscovery();
-
-                //Now you will start the connection
                 btSocket.connect();
             }
         }
@@ -63,9 +59,9 @@ public class ControlBoard extends AppCompatActivity {
     public void send(View view) {
         String message = messageET.getText().toString();
         if (message != null){
-
             if (btSocket != null) {
-                try { // Converting the string to bytes for transferring
+                try {
+                    // Converting the string to bytes for transferring
                     btSocket.getOutputStream().write(message.toString().getBytes());
                 }
                 catch (IOException e) {
